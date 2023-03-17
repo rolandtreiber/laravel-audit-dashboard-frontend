@@ -23,7 +23,7 @@ const MainLayout = () => {
     old_values: "",
     new_values: "",
     auditable_id: "",
-    created_at: format(new Date(), "yyyy-mm-dd")
+    created_at: ""
   })
   const [selectedResult, setSelectedResult] = useState()
 
