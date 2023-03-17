@@ -2,6 +2,7 @@ import React from "react";
 import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import TextField from '@mui/material/TextField';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const Controls = ({searchCriteria, setSearchCriteria, eventTypes, auditableTypes}) => {
 
@@ -23,6 +24,10 @@ const Controls = ({searchCriteria, setSearchCriteria, eventTypes, auditableTypes
 
   const handleAuditableIdChange = (e) => {
     setSearchCriteria({...searchCriteria, auditable_id: e.target.value})
+  };
+
+  const handleCreatedAtChange = (e) => {
+    setSearchCriteria({...searchCriteria, created_at: e})
   };
 
   return (
@@ -58,12 +63,12 @@ const Controls = ({searchCriteria, setSearchCriteria, eventTypes, auditableTypes
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <FormControl fullWidth>
             <TextField id="outlined-basic" label="Old Value" variant="outlined" value={searchCriteria.old_values} onChange={handleOldValueChange} />
           </FormControl>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <FormControl fullWidth>
             <TextField id="outlined-basic" label="New Value" variant="outlined"  value={searchCriteria.new_values} onChange={handleNewValueChange} />
           </FormControl>
@@ -73,6 +78,12 @@ const Controls = ({searchCriteria, setSearchCriteria, eventTypes, auditableTypes
             <TextField id="outlined-basic" label="Model Id" variant="outlined" value={searchCriteria.auditable_id} onChange={handleAuditableIdChange} />
           </FormControl>
         </Grid>
+        <Grid item xs={2}>
+          <FormControl fullWidth>
+            <DatePicker onChange={(e) => handleCreatedAtChange(e.format('YYYY-MM-DD'))} />
+          </FormControl>
+        </Grid>
+
       </Grid>
     </Box>
   )

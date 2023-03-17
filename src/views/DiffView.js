@@ -10,7 +10,6 @@ const DiffView = ({item}) => {
   const diffText = formatLines(diffLines(oldV, newV));
   const [diff] = diffText && parseDiff(diffText, {nearbySequences: 'zip'});
 
-  console.log(JSON.stringify(JSON.parse(item.new_values), null, 2))
   return (
     <Card>
       <CardHeader title="Difference"/>

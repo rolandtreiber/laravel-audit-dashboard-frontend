@@ -3,7 +3,8 @@ import {diffLines, formatLines} from 'unidiff';
 import 'react-diff-view/style/index.css';
 import MainLayout from "./views/MainLayout";
 import {Box, Container, CssBaseline} from "@mui/material";
-
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 function App() {
     const EMPTY_HUNKS = [];
 
@@ -33,10 +34,12 @@ function App() {
 
   return (
     <div className="App">
-      <CssBaseline />
-      <Container maxWidth="xl">
-        <MainLayout/>
-      </Container>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <CssBaseline />
+        <Container maxWidth="xl">
+          <MainLayout/>
+        </Container>
+      </LocalizationProvider>
     </div>
   );
 }

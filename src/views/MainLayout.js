@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import ResultsList from "./ResultsList";
 import DiffView from "./DiffView";
+import {format} from "date-fns";
 
 const MainLayout = () => {
   const API_URL = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL_TEST : process.env.REACT_APP_API_URL_BUILD
@@ -21,7 +22,8 @@ const MainLayout = () => {
     event: "",
     old_values: "",
     new_values: "",
-    auditable_id: ""
+    auditable_id: "",
+    created_at: format(new Date(), "yyyy-mm-dd")
   })
   const [selectedResult, setSelectedResult] = useState()
 
