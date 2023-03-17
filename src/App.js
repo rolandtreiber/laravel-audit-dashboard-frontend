@@ -1,6 +1,8 @@
 import {parseDiff, Diff, Hunk} from 'react-diff-view';
 import {diffLines, formatLines} from 'unidiff';
 import 'react-diff-view/style/index.css';
+import MainLayout from "./views/MainLayout";
+import {Box, Container, CssBaseline} from "@mui/material";
 
 function App() {
     const EMPTY_HUNKS = [];
@@ -31,15 +33,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-          <Diff viewType="split" diffType='' hunks={diff.hunks || EMPTY_HUNKS}>
-              {hunks =>
-                  hunks.map(hunk => (
-                      <Hunk key={hunk.content} hunk={hunk} />
-                  ))
-              }
-          </Diff>
-      </header>
+      <CssBaseline />
+      <Container maxWidth="xl">
+        <MainLayout/>
+      </Container>
     </div>
   );
 }
