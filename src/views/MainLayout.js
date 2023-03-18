@@ -79,20 +79,23 @@ const MainLayout = () => {
         setSearchCriteria={setSearchCriteria}
         eventTypes={eventTypes}
         auditableTypes={auditableTypes}
+        setSelectedResult={setSelectedResult}
       />
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <ResultsList results={results} resultSelected={setSelectedResult}/>
+          <ResultsList
+            total={total}
+            lastPage={lastPage}
+            searchCriteria={searchCriteria}
+            setSearchCriteria={setSearchCriteria}
+            results={results}
+            resultSelected={setSelectedResult}
+          />
         </Grid>
         <Grid item xs={8}>
           {selectedResult && <DiffView item={selectedResult}/>}
         </Grid>
       </Grid>
-    {/*<div>{JSON.stringify(results)}</div>*/}
-    {/*<h1>{total}</h1>*/}
-    {/*<h2>{lastPage}</h2>*/}
-    {/*  <h3>{JSON.stringify(auditableTypes)}</h3>*/}
-    {/*  <h4>{JSON.stringify(eventTypes)}</h4>*/}
     </>
   )
 }

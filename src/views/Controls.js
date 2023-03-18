@@ -4,30 +4,36 @@ import Grid from "@mui/material/Grid";
 import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-const Controls = ({searchCriteria, setSearchCriteria, eventTypes, auditableTypes}) => {
+const Controls = ({setSelectedResult, searchCriteria, setSearchCriteria, eventTypes, auditableTypes}) => {
 
   const handleEventChange = (e) => {
-    setSearchCriteria({...searchCriteria, event: e.target.value})
+    setSearchCriteria({...searchCriteria, event: e.target.value, page: 0})
+    setSelectedResult(null)
   };
 
   const handleAuditableChange = (e) => {
-    setSearchCriteria({...searchCriteria, auditable_type: e.target.value})
+    setSearchCriteria({...searchCriteria, auditable_type: e.target.value, page: 0})
+    setSelectedResult(null)
   };
 
   const handleOldValueChange = (e) => {
-    setSearchCriteria({...searchCriteria, old_values: e.target.value})
+    setSearchCriteria({...searchCriteria, old_values: e.target.value, page: 0})
+    setSelectedResult(null)
   };
 
   const handleNewValueChange = (e) => {
-    setSearchCriteria({...searchCriteria, new_values: e.target.value})
+    setSearchCriteria({...searchCriteria, new_values: e.target.value, page: 0})
+    setSelectedResult(null)
   };
 
   const handleAuditableIdChange = (e) => {
-    setSearchCriteria({...searchCriteria, auditable_id: e.target.value})
+    setSearchCriteria({...searchCriteria, auditable_id: e.target.value, page: 0})
+    setSelectedResult(null)
   };
 
   const handleCreatedAtChange = (e) => {
-    setSearchCriteria({...searchCriteria, created_at: e})
+    setSearchCriteria({...searchCriteria, created_at: e, page: 0})
+    setSelectedResult(null)
   };
 
   return (
