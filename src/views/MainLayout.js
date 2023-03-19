@@ -7,7 +7,12 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import ResultsList from "./ResultsList";
 import DiffView from "./DiffView";
-import {format} from "date-fns";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {Box, Alert} from "@mui/material";
+import BeforeState from "./BeforeState";
+import AfterState from "./AfterState";
+import 'react-json-pretty/themes/monikai.css';
 
 const MainLayout = () => {
   const API_URL = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL_TEST : process.env.REACT_APP_API_URL_BUILD
@@ -26,6 +31,7 @@ const MainLayout = () => {
     created_at: ""
   })
   const [selectedResult, setSelectedResult] = useState()
+  const [selectedTab, setSelectedTab] = useState(2)
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -44,6 +50,10 @@ const MainLayout = () => {
         setLastPage(response.data.last_page)
       }
     })
+  }
+
+  const handleTabSelected = (event, newValue) => {
+    setSelectedTab(newValue)
   }
 
   const loadEventTypes = () => {
@@ -71,6 +81,26 @@ const MainLayout = () => {
     loadItems()
   }, [searchCriteria])
 
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            {children}
+          </Box>
+        )}
+      </div>
+    );
+  }
+
   return (
     <>
       <Header/>
@@ -93,7 +123,24 @@ const MainLayout = () => {
           />
         </Grid>
         <Grid item xs={8}>
-          {selectedResult && <DiffView item={selectedResult}/>}
+          {selectedResult ? (
+            <>
+              <Tabs value={selectedTab} onChange={handleTabSelected} aria-label="tabs-for-display-options">
+                <Tab label="Before state" />
+                <Tab label="After state" />
+                <Tab label="Difference" />
+              </Tabs>
+              <TabPanel value={selectedTab} index={0}>
+                <BeforeState data={selectedResult.old_values}/>
+              </TabPanel>
+              <TabPanel value={selectedTab} index={1}>
+                <AfterState data={selectedResult.new_values}/>
+              </TabPanel>
+              <TabPanel value={selectedTab} index={2}>
+                <DiffView item={selectedResult}/>
+              </TabPanel>
+            </>
+          ) : (<Alert severity="info">No item is selected</Alert>)}
         </Grid>
       </Grid>
     </>
