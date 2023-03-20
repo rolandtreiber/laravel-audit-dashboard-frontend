@@ -16,6 +16,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-diff": "^0.0.7",
     "react-diff-view": "^3.0.3",
     "react-dom": "^18.2.0",

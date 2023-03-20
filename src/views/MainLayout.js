@@ -119,6 +119,7 @@ const MainLayout = () => {
             searchCriteria={searchCriteria}
             setSearchCriteria={setSearchCriteria}
             results={results}
+            selectedResult={selectedResult}
             resultSelected={setSelectedResult}
           />
         </Grid>
